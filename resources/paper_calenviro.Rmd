@@ -1,0 +1,70 @@
+---
+output:
+  pdf_document:
+    citation_package: natbib
+    fig_caption: yes
+    template: ./resources/aog-latex-ms.tex
+  word_document:
+    reference_docx: ./resources/aog_word_style.docx
+fontfamily: mathpazo
+fontsize: 11pt
+anonymous: false
+endnotes: false
+pagenumber: 1
+#bibliography: ../project.bib
+#biblio-style: ./resources/ajs.bst
+title: "The Title"
+author:
+- affiliation: University of Oregon, Sociology
+  name: "David Purucker""
+keywords: "environmental justice, low birth weight, poverty, cumulative pollution burden, public health"
+thanks: "My eternal gratitude to Natasha Erickson."
+abstract: "How do environmental pollutants and socioeconomic factors correlate with the incidence of low birth-weight?"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("check_packages.R")
+source("useful_functions.R")
+```
+
+# Introduction
+
+What is the relationship between hazarodus environmental pollutants and low birth-weight? Birth-weight is an important indicator of overall population health. Babies weighing less than 2,500 grams (~5.5 lbs.) at birth are classified as low birth-weight (LBW). LBW is a useful proxy for studying pre-term birth (births occurring before 37 weeks of gestation), which is a leading cause of worldwide infant and child mortality (WHO 2018). LBW babies are also at higher risk of suffering health problems later in life, such as asthma (Nepomnyaschy and Reichman 2006), coronary heart disease and type 2 diabetes (Barker et al. 2002), and developmental delays (Bhutta et al 2002). LBW risk is increased by social and environmental stressors, including poverty (Martinson and Reichman 2015), exposure to toxic air contaminants (Ghosh et al. 2012), pesticides (Harley et al, 2011), and living in close proximity to freeways (Laurent et al 2013). Chronic health conditions associated with LBW may in turn make LBW infants more sensitive to environmental pollution after birth. LBW is more prevalent among African-American women than white and non-white Hispanic women, and is a contributing factor to the disproprotionate rates of maternal and infant mortality among black women in the United States (Lu and Halfon 2003). LBW in the United States is concentrated in communities of color (Sims, Sims, and Bruce 2008) and is associated with environmental stressors such as traffic pollution (Ponce et al. 2005). Identifying pollutant predictors for LBW is therefore relevant for policymaking aimed at achieving environmental justice.
+
+To study this question, I used CalEnviroScreen 3.0, a public health modeling tool designed to assess the 'cumulative impacts' of environmental and social stressors on Californians (Rodriquez and Zeise 2017). Cumulative impact refers to the totality of health risks affecting a population, including both environmental and socio-economic conditions. Epidemiological researchers and policymakers are increasingly interested in statistical techniques that quantify such cumulative impacts, and CalEnviroScreen has been rated positively for this purpose (Greenfield, Rajan, and McKone 2017). In this analysis, OLS regrssion models are used to analyze the correlations of various pollution measures from CalEnviroScreen with the incidence of LBW at the census tract level. Findings indicate that ___________
+
+
+# Data and Methods
+
+CalEnviroScreen https://oehha.ca.gov/calenviroscreen/report/calenviroscreen-30) , or CES, is a science-based screening tool developed by the California EPA to assess the cumulative burden of environmental pollutants and social stressors on populations around the state. CES compiles data on variables related to cumulative burden for over 8000 census tracts in California. This data is amalgamated from a variety of local, state, and federal government sources, depending on the environmental or social indicator in question (Rodriquez and Zeise 2017). Data for environmental burdens is interacted with population characteristics like poverty and cardiovascular disease to calculate a cumulative burden score (CES score) for each census tract. Given California's size and its economic and geographic diversity, it seems reasonable to assume that trends in CalEnviroScreen data can be generalized to predict public health outcomes in other settings, at least within developed countries.
+
+Data on environmental burdens is provided by various boards and departments within the California EPA, as well as the California Department of Transportation and the federal EPA. Data on population characteristics come from the US Census Bureau and the California Department of Public Health. Some data was collected at the tract level, while other data was originally collected at different scales and then adjusted to fit tracts. For this analysis, all individual indicators of environmental hazard are retained as independent variables. Population characteristics included in this analysis are low birth-weight (the dependent variable), poverty, and race/ethnicity, measured as the percent of tract population that is not white. The total cumulative burden score (CES score) is not retained as a variable in this analysis, because it combines together environmental and social factors that I wish to disaggregate and test for their associations with a specific public health condition, low birth-weight. Poverty is included as a control variable. Because of its strong known associations with LBW and frequent coincidence with environmental stressors, leaving poverty out of my models could obscure significant independent effects of particular pollution exposures. Finally, a simple measure of tract-level race/ethnicity is included because of the implications of this analysis for environmental and racial justice.
+
+Indicators classified as pollution 'exposures' in CES includes ozone, measured as the amount of daily maximum 8-hour ozone concentration between May-October, averaged over 2012-14; PM2.5 (fine particulate matter, ~2.5 microns), measured as an annual mean concentration between 2012-14; particulate matter from on- and off-road diesel exhaust, measured as a spatial distribution of diesel PM emissions on a July day in 2012; an index of drinking water contaminants (including nitrate, perchlorate, and animal waste), measured between 2005-13; pesticides, measured as total pounds of selected active pesticide ingredients used in production-agriculture per square mile in the census tract, averaged over 2012-14; toxic releases, measured as toxicity-weighted concentrations of modeled chemical releases to air from facility emissions and off-site incineration, averaged over 2011-13; traffic, measured as vehicle-kilometers per hour per road length, within 150 meters of the census tract boundary in 2013.
+
+Indicators classified within the category of 'environmental effects' include brownfield clean-up sites, measured as the sum of sites per tract in 2016, weighted for proximity to populated census blocs; groundwater threats (such as leaking storage tanks) measured as the sum of sites per tract in 2016, weighted for cleanup status and proximity to population; hazardous wastes, measured as the sum of hazardous waste facilities per tract between 2012-2016; impaired water bodies, measured as the sum of water bodies designated as polluted in 2012; and solid waste sites and facilities, measured as the sum of such sites in 2016.
+
+Low birth-weight is measured as the percentage of live, singleton births with LBW (that is, weighing less than 5.5 lbs.) in the tract each year, averaged over 2006-12. Poverty is measured as the estimated percent of the population living below two times the federal poverty level, from 2011-15 (American Community Survey data).
+
+The analysis chosen for 
+
+# Results
+
+# Conclusions
+
+# References
+
+Barker, D. J. P., J. G. Eriksson, T. Forsén, and C. Osmond. 2002. “Fetal Origins of Adult Disease: Strength of Effects and Biological Basis.” International Journal of Epidemiology 31(6):1235–39. doi: 10.1093/ije/31.6.1235.
+Bhutta, Adnan T., Mario A. Cleves, Patrick H. Casey, Mary M. Cradock, and K. J. S. Anand. 2002. “Cognitive and Behavioral Outcomes of School-Aged Children Who Were Born Preterm: A Meta-Analysis.” JAMA 288(6):728–37. doi: 10.1001/jama.288.6.728.
+Ghosh, Jo Kay C., Michelle Wilhelm, Jason Su, Daniel Goldberg, Myles Cockburn, Michael Jerrett, and Beate Ritz. 2012. “Assessing the Influence of Traffic-Related Air Pollution on Risk of Term Low Birth Weight on the Basis of Land-Use-Based Regression Models and Measures of Air Toxics.” American Journal of Epidemiology 175(12):1262–74. doi: 10.1093/aje/kwr469.
+Greenfield, Ben K., Jayant Rajan, and Thomas E. McKone. 2017. “A Multivariate Analysis of CalEnviroScreen: Comparing Environmental and Socioeconomic Stressors versus Chronic Disease.” Environmental Health 16. doi: 10.1186/s12940-017-0344-z.
+Harley, Kim G., Karen Huen, Raul Aguilar Schall, Nina T. Holland, Asa Bradman, Dana Boyd Barr, and Brenda Eskenazi. 2011. “Association of Organophosphate Pesticide Exposure and Paraoxonase with Birth Outcome in Mexican-American Women.” PLOS ONE 6(8):e23923. doi: 10.1371/journal.pone.0023923.
+Laurent, Olivier, Jun Wu, Lianfa Li, Judith Chung, and Scott Bartell. 2013. “Investigating the Association between Birth Weight and Complementary Air Pollution Metrics: A Cohort Study.” Environmental Health 12(1):18. doi: 10.1186/1476-069X-12-18.
+Lu, Michael C., and Neal Halfon. 2003. “Racial and Ethnic Disparities in Birth Outcomes: A Life-Course Perspective.” Maternal and Child Health Journal 7(1):13–30. doi: 10.1023/A:1022537516969.
+Martinson, Melissa L., and Nancy E. Reichman. 2016. “Socioeconomic Inequalities in Low Birth Weight in the United States, the United Kingdom, Canada, and Australia.” American Journal of Public Health 106(4):748–54. doi: 10.2105/AJPH.2015.303007.
+Nepomnyaschy, Lenna, and Nancy E. Reichman. 2006. “Low Birthweight and Asthma Among Young Urban Children.” American Journal of Public Health 96(9):1604–10. doi: 10.2105/AJPH.2005.079400.
+Rodriquez, Matthew, and Lauren Zeise. 2017. CalEnviroScreen 3.0 Sourcebook. Sacramento, CA: California Office of Environmental Health Hazard Assessment.
+Sims, Mario, Tammy L. Sims, and Marino A. Bruce. 2008. “Race, Ethnicity, Concentrated Poverty, and Low Birth Weight Disparities.” Journal of National Black Nurses’ Association : JNBNA 19(1):12–18.
+World Health Organization (WHO). 2018. “Preterm Birth.” Retrieved October 19, 2020 (https://www.who.int/news-room/fact-sheets/detail/preterm-birth).
+
