@@ -1,44 +1,32 @@
 ---
+title: "OLS Regression Project"
+author: "David Purucker"
 output:
-  pdf_document:
-    citation_package: natbib
-    fig_caption: yes
-    template: ./resources/aog-latex-ms.tex
-  word_document:
-    reference_docx: ./resources/aog_word_style.docx
-fontfamily: mathpazo
-fontsize: 11pt
-anonymous: false
-endnotes: false
-pagenumber: 1
-#bibliography: ../project.bib
-#biblio-style: ./resources/ajs.bst
-title: "Low Birth-Weight and Air Pollution: Examining Some Associations in CalEnviroScreen 3.0 Data"
-author:
-- affiliation: University of Oregon, Sociology
-  name: "David Purucker""
-keywords: "environmental justice, low birth weight, poverty, cumulative pollution burden, public health"
-thanks: "My eternal gratitude to Natasha Erickson."
-abstract: "How do environmental pollutants and socioeconomic factors correlate with the incidence of low birth-weight?"
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-source("check_packages.R")
-source("useful_functions.R")
+```{r Setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, error=FALSE, message=FALSE, include=FALSE)
+load("~/Desktop/sociology/soc_year2/Soc 412:512 (Stats II)/calenviro_proj/output/ces3_complete.RData")
+if(!require(stargazer)) {
+  install.packages("stargazer", "texreg")
+}
 ```
 
 # Introduction
 
 What is the relationship between hazarodus environmental pollutants, socioeconomic factors, and low birth-weight? Birth-weight is an important indicator of overall population health. Babies weighing less than 2,500 grams (~5.5 lbs.) at birth are classified as low birth-weight (LBW). LBW is a useful proxy for studying pre-term birth (births occurring before 37 weeks of gestation), which is a leading cause of worldwide infant and child mortality (WHO 2018). LBW babies are also at higher risk of suffering health problems later in life, such as asthma (Nepomnyaschy and Reichman 2006), coronary heart disease and type 2 diabetes (Barker et al. 2002), and developmental delays (Bhutta et al 2002). LBW risk is increased by social and environmental stressors, including poverty (Martinson and Reichman 2015), exposure to toxic air contaminants (Ghosh et al. 2012), pesticides (Harley et al, 2011), and living in close proximity to freeways (Laurent et al 2013). Chronic health conditions associated with LBW may in turn make LBW infants more sensitive to environmental pollution after birth. LBW is more prevalent among African-American women than white and non-white Hispanic women, and is a contributing factor to the disproprotionate rates of maternal and infant mortality among Black women in the United States (Lu and Halfon 2003). LBW in the United States is concentrated in communities of color (Sims, Sims, and Bruce 2008). Identifying pollutant predictors for LBW is therefore relevant for policymaking aimed at achieving environmental justice. 
 
-To study this question, I used CalEnviroScreen 3.0, a public health modeling tool designed to assess the 'cumulative impacts' of environmental and social stressors on Californians (Rodriquez and Zeise 2017). Cumulative impact refers to the totality of health risks affecting a population, including both environmental and socio-economic conditions. In this analysis, OLS regrssion models are used to analyze the correlations of various pollution measures from CalEnviroScreen with the incidence of LBW at the census tract level, to determine the prevalence of environmental and social correlates of LBW in the CES data, and understand the strengh of different LBW effects of each stressor. Findings indicate a positive and moderately strong independent effect of ozone air pollution on LBW, and similarly positive, though weaker, effects from particulate matter air pollution. These findings suggest that policies aimed at curtailing air pollution, especially ozone, will have the most beneficial effect on reducing LBW and its associated public health effects. [pending discussion section writeup]
+To study this question, I used CalEnviroScreen 3.0, a public health modeling tool designed to assess the 'cumulative impacts' of environmental and social stressors on Californians (Rodriquez and Zeise 2017). Cumulative impact refers to the totality of health risks affecting a population, including both environmental and socio-economic conditions. In this analysis, OLS regrssion models are used to analyze the correlations of various pollution measures from CalEnviroScreen with the incidence of LBW at the census tract level, to determine the prevalence of environmental and social correlates of LBW in the CES data, and understand the strengh of different LBW effects of each stressor. Findings indicate a positive and moderately strong independent effect of ozone air pollution on LBW, and similarly positive, though weaker, effects from particulate matter air pollution. These findings suggest that policies aimed at curtailing air pollution, especially ozone, will have the most beneficial effect on reducing LBW and its associated public health effects.
 
 # Literature review
 
 The relationship between air pollution and low birth-weight has been very well-studied. In a recent systematic meta-analysis, Bekkar et al. (2020) evaluate the results of 57 studies conducted between 2007 and 2019 in the United States that consider the relationship of adverse pregnancy outcomes (low birth-weight, preterm birth, and stillbirth) and environmental conditions associated with climate change, including heat exposure and the two forms of air pollution, ozone and PM2.5. Their meta-analysis, which includes data on nearly 38.8 million births, indicate a strong positive relationship between heat and both pollutants with adverse birth outcomes. 25 out of 29 studies in the review found a positive association between PM2.5 or ozone exposure with LBW. These studies also indicate that some subpopulations are at particular risk of pollution-associated LBW, including asthmatics and Black women. The large sample size and geographic range of this review, encompassing every region of the United States, strongly supports the prediction that a positive relationship between LBW and air pollution variables will be found in the CalEnviroScreen 3.0 dataset. [note Bekkar et al.'s scale of analysis—-do most of their sampled studies address LBW at the county level, cities, tracts, ???]
 
-The connection between LBW and other forms of pollution included in the CalEnviroScreen data is also well-established. LBW correlates have been found in studies considering proximity to freeway traffic (Laurent et al. 2013, Ponce et al. 2005), pesticides (Harley et al. 2011), diesel particulate matter (Laurent et al. 2016), contaminated drinking water (Currie et al. 2013) and proximity to hazardous waste sites (Berry and Bove 1997). Finally, social determinants of health such as porverty and race also have a well-established relationship with LBW (Lu and Hafton 2003, Martinson and Recihman 2016). [expand—what do Lu and Hafton and Martinson and Reciman find][state what my study adds hahaha][relatively new dataset, high-quality census tract data over a large geographic area]
+The connection between LBW and other forms of pollution included in the CalEnviroScreen data is also well-established. LBW correlates have been found in studies considering proximity to freeway traffic (Laurent et al. 2013, Ponce et al. 2005), pesticides (Harley et al. 2011), diesel particulate matter (Laurent et al. 2016), contaminated drinking water (Currie et al. 2013) and proximity to hazardous waste sites (Berry and Bove 1997). Finally, social determinants of health such as porverty and race also have a well-established relationship with LBW (Lu and Hafton 2003, Martinson and Recihman 2016).
 
 # Data and methods
 
@@ -59,7 +47,7 @@ The histogram in figure 1 shows the distribution of the dependent variable: low 
 
 The scatterplot in figure 2 displays the correlation between low birth-weight on the y-axis and ozone on the x-axis. In the exploratory models, I found the relationship between ozone and low birth-weight to be the strongest, so it is useful to display the distribution of these two variables together. Though ozone is a continuous variable, the data has been recorded in such a way that it only takes certain values rounded to the hundredth unit—-this is why the census tracts are plotted in a pattern of vertical lines. Because there is such a large number of census tract observations being plotted, it is not immediately apparent that there is any relationship between these two variables. However, when a trend line is added to the plot, a slight positive relationship can be perceived in the data. Census tracts with higher recorded ozone levels also have higher rates of low birth-weight, on average.
 
-``` {r descriptive statistics—-LBW distribution}
+``` {r descriptive statistics—-LBW distribution, echo=FALSE, message=FALSE, warning=FALSE, results="asis"}
 
 # Univariate distribution of LBW
 hist(ces3_complete$lbw, main="Fig 1. Low Birth-Weight by Census Tract", xlab="% of births", ylab="# of Census Tracts", col="hotpink")
@@ -67,7 +55,7 @@ summary(ces3_complete$lbw)
 
 ```
 
-``` {r descriptive statistics--ozone and LBW; run chunk together}
+``` {r descriptive statistics--ozone and LBW, echo=FALSE, message=FALSE, warning=FALSE, results="asis"}
 # Joint distribution of ozone and LBW
 plot(ces3_complete$ozone, ces3_complete$lbw, main="Fig 2. Census Tracts by Ozone and Low Birth-Weight", xlab="Ozone", ylab ="Low Birth-Weight %")
 abline(lm(ces3_complete$lbw~ces3_complete$ozone))
@@ -76,17 +64,17 @@ abline(lm(ces3_complete$lbw~ces3_complete$ozone))
   
 # Results
 
-Four regression models were constructed for this analysis. Note that because the range of ozone data only ranges from 0.02 to 0.068 parts per million, it is more meaningful to interpret the coefficients for this variable by considering the effect of a 1/100th-unit increase, rather than a 1-unit increase. Therefore, in the following interrpretations, I divide the ozone coefficient by 100.
+Four regression models were constructed for this analysis. Note that because the ozone data only ranges from 0.02 to 0.068 parts per million, it is more meaningful to interpret the coefficients for this variable by considering the effect of a 1/100th-unit increase, rather than a 1-unit increase. Therefore, in the following interrpretations, I divide the ozone coefficient by 100.
 
 Model 1 is a "kitchen sink" model which includes all of the environmental effects variables added together. The point of this model was to determine which pollution variables are associated most stronlgy with LBW. Ozone, PM2.5, and diesel PM are statistically significant at the p<0.01 level. A .01 ppm increase of ozone is associated with a .17 percentage point increase of LBW in the tracts. This is the strongest predictor of LBW. A 1-μg/m3 increase in PM2.5 is associated with a 0.05 percentage point increase in LBW, and a 1-kg/day increase in diesel PM is associated with a 0.01 increase in LBW. Several other pollutants (traffic, cleanup sites, impaired water bodies, and solid waste) are statistically significant at the .05 level, but the magnitude of the coefficients is very small. These variables do not seem to be playing a major role in low birth-weight outcomes. This, in combination with the results of models 3 and 4, is my rationale for focusing on ozone, PM2.5, and diesel PM in my analysis.
 
 Model 2 considers the independent effect of poverty on LBW. The effect is statistically significant at the .001 level, and its magnitude is fairly large: for every percentage point increase in the poverty level, the model predicts a .02 percentage point increase in LBW, on average. Inclusion of poverty in the model reduces the magnitude of the key pollution variables identified in model 1. The predictive strength of ozone drops from .17 to .06, pm2.5 from .05 to .04, and diesel PM from .01 to .008. All three variables remain statistically significant at the same levels, however. This means that while poverty exerts an independent effect on the incidence of LBW, and is substantially collinear with the pollution variables, it does not completely account for the association of environmental pollution with LBW in census tracts.
 
-Model 3 assesses the independent effect of race on LBW. This model indicates some surprising findings. It predicts that for every 1 percentage point increase in the nonwhite population in census tracts, there will be a .02 percentage point increase in LBW. The race variable here is statistically significant at the .001 level. Inclusion of race in this model changes some predicted associations of environmental pollutants and LBW present in the earlier models. The effect of ozone actually increases with the inclusion of race, from .17 units in model 1 to .20 here. [ask Aaron] The effect of diesel PM pollution remains 0.01. PM 2.5 pollution, however, is no longer statistically significant in this model, and the magnitude of its effect has dropped to almost 0, from .05 in model 1 to -0.01. PM 2.5's statistical insignificance in this model suggests that a higher nonwhite population in census tracts accounts for the association of PM2.5 pollution with LBW in models 1 and 2. Similar to model 1, ozone and diesel PM remain stasticially significant. Some of the other environmental pollutants——drinking water, pesticides, and toxic releases——are statistically significant in this model, but their magnitudes remain small.
+Model 3 assesses the independent effect of race on LBW. This model indicates some surprising findings. It predicts that for every 1 percentage point increase in the nonwhite population in census tracts, there will be a .02 percentage point increase in LBW. The race variable in this model is statistically significant at the .001 level. The inclusion of race changes some predicted associations of environmental pollutants and LBW present in the earlier models. The effect of ozone actually increases with the inclusion of race, from .17 units in model 1 to .20 here [ask Aaron about this]. The effect of diesel PM pollution remains 0.01. PM 2.5 pollution, however, is no longer statistically significant in this model, and the magnitude of its effect has dropped to almost 0, from .05 in model 1 to -0.01. PM 2.5's statistical insignificance in this model suggests that a higher nonwhite population in census tracts accounts for the association of PM2.5 pollution with LBW in models 1 and 2. Similar to model 1, ozone and diesel PM remain stasticially significant. Some of the other environmental pollutants——drinking water, pesticides, and toxic releases——are statistically significant in this model, but their magnitudes remain small.
 
 Model 4 includes both the effects of poverty and the nonwhite population. Both effects are statistically significant. The indepdendent effect of poverty here has dropped from .02 to .01; the effect of percent-nonwhite population has stayed the same, as .02. PM2.5 pollution seems to be very highly correlated with race. Because PM2.5 went from statistically significant in model 2 to not statistically significant in the models including a race variable, it seems that this pollution variable is fully explained by race, whereas the other pollution variables——which retain statistical significance and a significant magnitude in these models——are not. Overall, the results of this model suggest that race and poverty each appear to have an effect on LBW outcomes, but this effect does not fully predict the level of LBW. Environmental effects, especially ozone pollution, retain a significant independent influence on the rate of LBW, even when the confounding roles of poverty and race are accounted for.
 
-``` {r Models}
+``` {r Models, echo=FALSE, message=FALSE, warning=FALSE, results="asis"}
 
 model1 <- lm(lbw~ozone+pm2.5+dieselpm+drinkingwater+pesticides+toxrelease+traffic+
                cleanupsite+groundwater+hazwastes+impwater+solidwaste, data=ces3_complete)
@@ -100,18 +88,20 @@ model3 <- lm(lbw~ozone+pm2.5+dieselpm+drinkingwater+pesticides+toxrelease+traffi
 model4 <- lm(lbw~ozone+pm2.5+dieselpm+drinkingwater+pesticides+toxrelease+traffic+
                cleanupsite+groundwater+hazwastes+impwater+solidwaste+poverty+pctnonwhite, data=ces3_complete)
 
-
+library(stargazer)
 stargazer(model1, model2, model3, model4, type="text", digits = 3, covariate.labels = c("Ozone", "PM2.5", "Diesel PM", "Drinking Water Quality", "Pesticides", "Toxic Releases", "Traffic", "Proximity to Cleanup Sites", "Groundwater", "Hazardous Wastes", "Impaired Water", "Solid Waste", "Poverty", "Nonwhite Tract Percentage"), dep.var.labels = "Low Birth-Weight")
 
 ```
 
 # Discussion
 
-¶ resume
+In this analysis, I have applied an OLS regression method to examine the influence of various environmental and social stressors upon low birth-weight (LBW) outcomes in the CalEnviroScreen 3.0 data analysis tool. Four models were constructed to assess the relative strengh of correlation between low birth-weight and variables like ozone, particulate matter air pollution, hazardous wastes, and social conditions like poverty or race. From this analysis, three findings seem particularly important. First, air pollution, including ozone, PM2.5 pollution, and diesel PM, has a stronger effect on LBW outcomes in California census tracts than other forms of pollution, such as proximity to hazardous waste sites, impaired water quality, or pesticide exposure. While this analysis doesn't allow me to determine the precise causal mechanism behind the different strength of association for these variables, it seems reasonable to assume that air pollution has a stronger effect on many kind of health outcomes, including LBW, because of its very wide geographical dispersion. Other forms of pollution, such as exposure to pesticides or hazardous wastes, have a strong demonstrated effect upon adverse birth outcomse at the local level, but do not pose nearly as great a risk over a wide geographic area.
 
-¶ implications for the study of low birth-weight and public health
+The models which include poverty and race controls reveal two other interesting findings. First, when race is controlled for (in model 3), PM2.5 is no longer statistically significant, and the magnitude of its effect drops significantly. This indicates that a higher nonwhite population in census tracts accounts for the association of PM2.5 pollution with LBW present in the model which does not include any race variable. Second, the model which controls for both poverty and race indicates that while the inclusion of these variables reduces the magnitude and statistical significance of PM2.5, the other air pollution effects, ozone and diesel PM, retain a significant independent effect on LBW. This is especially true of ozone. The role of ozone is particularly interesting in this analysis. In model 2, when poverty is controlled for, the effect of ozone diminishes considerably. In model 3, however, when race is controlled for, the effect of ozone actually increases from its level in model 1. Finally, in model 4, its effect returns almost exactly to its level in model 1. It is not clear to me why this is the case. Future research could explore the particular relationship of ozone in the presence or absence of different, or more disaggregated, socio-economic variables of this kind.
 
-¶ future directions
+The main implication of this study seems to be that, among all major environmental stressors, the most significant threats to public health are air pollution, especially ozone. Policies aimed at reducing adverse birth outcomes, which have a disproportionate effect upon non-white populations, should prioritize efforts to reduce these pervasive forms of pollution in California and elsewhere. Doing so would have a particularly positive effect for poor and non-white people. However, this analysis also indicates that there is an independent effect of poverty and racialization above and beyond the effects of air pollution. Policies aimed at reducing poor birth outcomes will have to take this into account.
+
+This analysis has a number of important limitations. First, this data only includes census tracts in California. While results in a state as large and socially diverse as California are plausibly generalizable to many other contexts, future research on pollution and LBW should explore the relationship in other contexts and at different scales. Second, future analyses could use more complex methods to explore interactions between different variables. Third, more detailed socio-economic data than is available in CalEnviroScreen could help to explain puzzles revealed in this analysis, such as the up-and-down strength of the ozone effect on LBW. 
 
 # References
 
