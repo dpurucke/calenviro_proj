@@ -1,6 +1,6 @@
 #' ---
 #' title: "organize_data_calenviro.R"
-#' author: "David"
+#' author: "David Purucker"
 #' ---
 
 # This script will read in raw data from the input directory, clean it up to produce 
@@ -13,13 +13,13 @@ setwd("~/Desktop/sociology/soc_year2/Soc 412:512 (Stats II)/calenviro_proj")
 source("check_packages.R")
 source("useful_functions.R")
 
-# Load datasets
+# Load datasets (separate worksheets in the original .xlxs file)
 library(readr)
 ces3results_indicators <- read_csv("input/ces3results_indicators.csv")
 ces3results_demographics <- read_csv("input/ces3results_demographics.csv")
 
 # Merge datasets
-ces3_merged <- merge(ces3results_indicators,ces3results_demographics,by="censustract")
+ces3_merged <- merge(ces3results_indicators, ces3results_demographics, by="censustract")
 View(ces3_merged)
 
 # Convert race/ethnicity categories to pct. nonwhite
@@ -33,7 +33,7 @@ ces3_subsetted <- subset(ces3_merged, select=c("censustract", "totalpop.x", "ces
                                               "lbw", "poverty", "pctnonwhite"))
 
 # Drop missing values for PM2.5 pollution, traffic, drinking water, poverty, 
-# pct. nonwhite, and LBW.
+# pct. nonwhite, and LBW
 ces3_complete <- na.omit(ces3_subsetted)
 
 # Check for missing values

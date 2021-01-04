@@ -14,10 +14,6 @@ hist(ces3_complete$lbw, main="Low Birth-Weight by Census Tract", xlab="% of birt
 summary(ces3_complete$lbw)
 
 
-# Univariate statistics of the key independent variables (I should make a descriptive statistics table)
-
-
-
 # Scatterplot of the bivariate relationship between ozone and lbw
 plot(ces3_complete$ozone, ces3_complete$lbw, main="Census Tracts by Ozone and Low Birth-Weight", xlab="Ozone", ylab ="Low Birth-Weight %")
 abline(lm(ces3_complete$lbw~ces3_complete$ozone))

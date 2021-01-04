@@ -1,0 +1,23 @@
+---
+output:
+  pdf_document:
+    citation_package: natbib
+    fig_caption: yes
+    template: ./resources/aog-latex-ms.tex
+  word_document:
+    reference_docx: ./resources/aog_word_style.docx
+fontfamily: mathpazo
+fontsize: 11pt
+anonymous: false
+endnotes: false
+pagenumber: 1
+#bibliography: ../project.bib
+#biblio-style: ./resources/ajs.bst
+title: "Low Birth-Weight and Air Pollution: Examining Some Associations in CalEnviroScreen 3.0 Data"
+author:
+- affiliation: University of Oregon, Sociology
+  name: "David Purucker""
+keywords: "environmental justice, low birth weight, poverty, cumulative pollution burden, public health"
+thanks: "My eternal gratitude to Natasha Erickson."
+abstract: "How do environmental pollutants and socioeconomic factors correlate with the incidence of low birth-weight?"
+---
